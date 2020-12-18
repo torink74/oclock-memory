@@ -1,0 +1,39 @@
+@import "reset";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+$font-primary: 'Dosis', sans-serif;
+
+body {
+  font-family: $font-primary;
+  background-color: #262626;
+}
+
+.board-grid {
+  margin: 50px auto;
+  display: flex;
+  width: 708px;
+  border: 4px solid grey;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  background-color: grey;
+}
+
+.card {
+  height: 100px;
+  width: 100px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 4px solid grey;
+  background-color: #444;
+  background-image: url(../img/cards.png);
+  background-size: 100px auto;
+  color: #fff;
+  font-size: 150%;
+
+  &.hide {
+    background-image: none;
+  }
+}
