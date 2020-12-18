@@ -1,0 +1,16 @@
+{%- extends 'layout.twig' -%}
+
+{%- block mainContent %}
+    <div id="game-content">
+        <div id="game-header">
+            <h1>Jeu de mémoire</h1>
+        </div>
+        <div id="game-board" class="board-grid">
+            {% for index, position in cards %}
+                <div class="card hide" data-letter="{{ index }}" style="background-position: 0 {{ position }}px">
+                    {{ index }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock mainContent -%}

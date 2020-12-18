@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    {#
+        Préchargement des polices provenant de Google
+        Permet à ces ressources d'êtres chargées plus rapidement lors du chargement de la page
+    #}
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+    {%- include "inc/scripts_top.twig" -%}
+
+</head>
+<body>
+{% block body %}
+    <div id="body">
+        {% block header %}
+            {%- include "components/header/base.twig" -%}
+        {% endblock %}
+        <main role="main">
+            {% block mainContent "" %}
+        </main>
+        {% block footer %}
+            {%- include "components/footer/base.twig" -%}
+        {% endblock %}
+    </div>
+{% endblock body %}
+
+{%- include "inc/scripts_bottom.twig" -%}
+
+</body>
+</html>
