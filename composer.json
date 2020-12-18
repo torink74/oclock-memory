@@ -1,0 +1,22 @@
+{
+  "name": "oclock/memory",
+  "type": "project",
+  "description": "Projet O'clock pour le jeu du Memory",
+  "authors": [
+    {
+      "name": "Adrien Delcroix"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "twig/twig": "^2.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Memory\\": "app/src/Memory"
+    }
+  }
+}
