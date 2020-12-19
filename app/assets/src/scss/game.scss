@@ -32,6 +32,17 @@ h1 {
   display: inline-block;
 }
 
+.scores {
+  margin: 20px auto;
+  display: flex;
+  width: 708px;
+  background-color: grey;
+
+  ul {
+    list-style: square;
+  }
+}
+
 .board-grid {
   margin: 20px auto;
   display: flex;

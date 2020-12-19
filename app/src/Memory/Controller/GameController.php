@@ -23,7 +23,21 @@ final class GameController
      */
     public function start()
     {
-        $context = [];
+        /**
+         * Récupération des meilleurs temps en millisecondes
+         */
+        $gameModel = new GameModel();
+        $scoresMilliseconds = $gameModel->getHighscores(5);
+
+        /**
+         * Transformation des temps en millisecondes vers un format lisible par un humain
+         * La fonction array_map permet d'appliquer une fonction sur chaque élément d'un tableau
+         */
+        $highscores = array_map('\Memory\Helper\TimeHelper::formatMilliseconds', $scoresMilliseconds);
+
+        $context = [
+            'scores'    => $highscores
+        ];
 
         echo $this->_twig->render('game.twig', $context);
     }

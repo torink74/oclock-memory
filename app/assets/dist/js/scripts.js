@@ -202,6 +202,14 @@ function gameLoop(event)
     event.preventDefault();
 
     /**
+     * On retire les highscores en vérifiant si l'élément est toujours présent sur la page
+     */
+    let scores = document.getElementById('scores');
+    if (scores !== null) {
+        scores.remove();
+    }
+
+    /**
      * On distribue de nouvelles cartes
      */
     var xmlhttp = new XMLHttpRequest();
