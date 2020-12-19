@@ -2,6 +2,26 @@ let cards = document.querySelectorAll('.card');
 let previousReturnedCard = null;
 
 /**
+ * Permet d'ajouter une fonction se déclanchant au click de chaque carte du jeu
+ */
+function addCardListeners()
+{
+    cards.forEach(function (card) {
+        card.addEventListener('click', handleClickOnCard);
+    });
+}
+
+/**
+ * Permet de retirer une fonction se déclanchant au click de chaque carte du jeu
+ */
+function removeCardListeners()
+{
+    cards.forEach(function (card) {
+        card.removeEventListener('click', handleClickOnCard);
+    });
+}
+
+/**
  * Vérifie si la partie est terminée et que le joueur a gagné
  * @returns {boolean} True si le joueur a gagné
  */
@@ -20,7 +40,18 @@ function isGameWon()
     }
 }
 
-function handleCardAction(card)
+/**
+ * Affiche une carte durant le temps indiqué
+ *
+ * @param ms integer Nombre de millisecondes
+ * @returns {Promise<unknown>}
+ */
+function displayCard(ms)
+{
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function handleCardAction(card)
 {
     /**
      * On affiche la carte
@@ -59,11 +90,20 @@ function handleCardAction(card)
             }
             else {
                 /**
-                 * Les deux cartes retournées ne correspondent pas, on retourne cette carte
-                 * et la carte précédente face cachée
+                 * Les deux cartes retournées ne correspondent pas, on affiche cette carte
+                 * pendant 2 secondes puis on la retourne avec la carte précédente face cachée.
+                 * On retire les listeners sur les cartes pour ne pas que le joueur puisse jouer à nouveau
+                 * avant que les cartes ne se retournent
                  */
+                removeCardListeners();
+                await displayCard(2000);
                 card.classList.add('hide');
                 previousReturnedCard.classList.add('hide');
+
+                /**
+                 * On réactive les listeners pour les cartes
+                 */
+                addCardListeners();
             }
 
             /**
@@ -81,7 +121,8 @@ function handleCardAction(card)
     }
 }
 
-function handleClickOnCard(event) {
+function handleClickOnCard(event)
+{
     let card = event.target;
 
     /**
@@ -100,6 +141,4 @@ function handleClickOnCard(event) {
     }
 }
 
-cards.forEach(function (card) {
-    card.addEventListener('click', handleClickOnCard);
-});
+addCardListeners();
