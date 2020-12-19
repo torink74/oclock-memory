@@ -9,10 +9,31 @@ $font-primary: 'Dosis', sans-serif;
 body {
   font-family: $font-primary;
   background-color: #262626;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+  color: #fff;
+  padding:16px;
+  font-weight:bold;
+  margin:16px;
+}
+
+.game-header {
+  margin: 10px auto;
+  width: 800px;
+  height: 100px;
+  background-color: #a3a3a3;
+}
+
+.settings {
+  margin: 10px auto;
+  display: inline-block;
 }
 
 .board-grid {
-  margin: 50px auto;
+  margin: 20px auto;
   display: flex;
   width: 708px;
   border: 4px solid grey;

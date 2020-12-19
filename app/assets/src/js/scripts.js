@@ -1,6 +1,12 @@
 let cards = document.querySelectorAll('.card');
 let previousReturnedCard = null;
 let progressBar = document.getElementById('progress-bar');
+let gameSettings = document.getElementById('game-settings');
+
+function addGameListeners()
+{
+    gameSettings.addEventListener('submit', gameLoop);
+}
 
 /**
  * Permet d'ajouter une fonction se déclanchant au click de chaque carte du jeu
@@ -168,22 +174,23 @@ function handleClickOnCard(event)
 
 /**
  * Lance une partie
- *
- * @param time Durée d'une partie en secondes
  */
-function gameLoop(time)
+function gameLoop(event)
 {
-    /**
-     * On ajoute un évènement lorsque le timer est écoulé
-     */
-    progressBar.addEventListener('animationend', gameOver);
+    event.preventDefault();
 
     /**
-     * On lance le timer
+     * On lance le timer en récupérant la valeur spécifiée dans les options du jeu
      */
+    let time = document.getElementById('time').value;
     progressBar.style.animationDuration = time + 's';
     progressBar.style.animationPlayState = 'running';
 }
 
+/**
+ * Evènement lorsque le timer est écoulé
+ */
+progressBar.addEventListener('animationend', gameOver);
+
 addCardListeners();
-gameLoop(300);
+addGameListeners();

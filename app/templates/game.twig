@@ -2,8 +2,14 @@
 
 {%- block mainContent %}
     <div id="game-content">
-        <div id="game-header">
-            <h1>Jeu de mémoire</h1>
+        <div id="game-header" class="game-header">
+            <h1>O'clock's Memory Game®</h1>
+            <form id="game-settings" class="settings" method="post">
+                <label for="time" class="input-setting">Choisir la durée de la partie (en secondes)</label>
+                <input id="time" type="number" name="time" value="60">
+                <br/>
+                <input type="submit" value="Jouer">
+            </form>
         </div>
         <div id="game-board" class="board-grid">
             {% for index, position in cards %}
