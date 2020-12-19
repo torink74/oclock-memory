@@ -21,14 +21,6 @@ final class GameModel
          * Paramétrage de l'accès à la base de données
          */
         $databaseHandler = new DatabaseHandler();
-        $settings = [
-            'database_type' => 'mysql',
-            'database_name' => 'memory',
-            'server'        => 'db',
-            'username'      => 'root',
-            'password'      => ''
-        ];
-        $databaseHandler->setDatabase($settings);
         $this->_database = $databaseHandler->getDatabase();
         $this->_tableName = 'game';
     }
