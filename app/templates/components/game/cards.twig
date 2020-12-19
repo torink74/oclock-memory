@@ -1,0 +1,5 @@
+{% for index, position in cards %}
+    <div class="card hide" data-letter="{{ index }}" style="background-position: 0 {{ position }}px">
+        {{ index }}
+    </div>
+{% endfor %}

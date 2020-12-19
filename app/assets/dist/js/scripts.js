@@ -1,4 +1,3 @@
-let cards = document.querySelectorAll('.card');
 let previousReturnedCard = null;
 let progressBar = document.getElementById('progress-bar');
 let gameSettings = document.getElementById('game-settings');
@@ -14,6 +13,8 @@ function addGameListeners()
  */
 function addCardListeners()
 {
+    let cards = document.querySelectorAll('.card');
+
     cards.forEach(function (card) {
         card.addEventListener('click', handleClickOnCard);
     });
@@ -24,6 +25,8 @@ function addCardListeners()
  */
 function removeCardListeners()
 {
+    let cards = document.querySelectorAll('.card');
+
     cards.forEach(function (card) {
         card.removeEventListener('click', handleClickOnCard);
     });
@@ -199,16 +202,37 @@ function gameLoop(event)
     event.preventDefault();
 
     /**
-     * On lance le timer en récupérant la valeur spécifiée dans les options du jeu
+     * On distribue de nouvelles cartes
      */
-    let time = document.getElementById('time').value;
-    progressBar.style.animationDuration = time + 's';
-    progressBar.style.animationPlayState = 'running';
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            document.getElementById('game-board').innerHTML = this.response;
+            addCardListeners();
+        }
+    };
+    xmlhttp.open("POST", "", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("new-game=1");
 
     /**
      * On initialise la date de début de la partie
      */
     startTime = new Date().getTime();
+
+    /**
+     * Recommence l'animation du timer
+     */
+    progressBar.classList.remove('progress-bar');
+    void progressBar.offsetWidth;
+    progressBar.classList.add('progress-bar');
+
+    /**
+     * On lance le timer en récupérant la valeur spécifiée dans les options du jeu
+     */
+    let time = document.getElementById('time').value;
+    progressBar.style.animationDuration = time + 's';
+    progressBar.style.animationPlayState = 'running';
 }
 
 /**
@@ -216,5 +240,4 @@ function gameLoop(event)
  */
 progressBar.addEventListener('animationend', gameOver);
 
-addCardListeners();
 addGameListeners();

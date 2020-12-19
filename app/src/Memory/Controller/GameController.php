@@ -23,10 +23,7 @@ final class GameController
      */
     public function start()
     {
-        $cards = CardHelper::getCards(14);
-        $context = [
-            'cards' => $cards
-        ];
+        $context = [];
 
         echo $this->_twig->render('game.twig', $context);
     }
@@ -42,6 +39,18 @@ final class GameController
         if (isset($_POST['time'])) {
             $time = (int)$_POST['time'];
             $this->registerWin($time);
+            exit;
+        }
+
+        if (isset($_POST['new-game']) && $_POST['new-game'] == 1) {
+            $cards = CardHelper::getCards(14);
+            $context = [
+                'cards' => $cards
+            ];
+
+            $html = $this->_twig->render('components/game/cards.twig', $context);
+            echo $html;
+            exit;
         }
     }
 }

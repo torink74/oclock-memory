@@ -12,11 +12,7 @@
             </form>
         </div>
         <div id="game-board" class="board-grid">
-            {% for index, position in cards %}
-                <div class="card hide" data-letter="{{ index }}" style="background-position: 0 {{ position }}px">
-                    {{ index }}
-                </div>
-            {% endfor %}
+            {# Chargé via un appel ajax une fois que le joueur a cliqué sur "Jouer" #}
         </div>
         <div id="progress" class="progress-container">
             <div id="progress-bar" class="progress-bar"></div>
