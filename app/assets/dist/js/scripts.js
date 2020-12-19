@@ -2,6 +2,7 @@ let cards = document.querySelectorAll('.card');
 let previousReturnedCard = null;
 let progressBar = document.getElementById('progress-bar');
 let gameSettings = document.getElementById('game-settings');
+let startTime = null;
 
 function addGameListeners()
 {
@@ -116,7 +117,25 @@ async function handleCardAction(card)
                      * On stoppe le timer
                      */
                     progressBar.style.animationPlayState = 'paused';
-                    alert("Bravo champion ! Essayes de modifier la durée de la partie pour plus de challenge !");
+
+                    /**
+                     * On calcule le temps qu'a pris le joueur pour gagner
+                     */
+                    let endTime = new Date().getTime();
+                    let time = endTime - startTime;
+
+                    /**
+                     * On enregistre le temps en base de données
+                     */
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState === 4 && this.status === 200) {
+                            alert("Bravo champion ! Essayes de modifier la durée de la partie pour plus de challenge !");
+                        }
+                    };
+                    xmlhttp.open("POST", "", true);
+                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xmlhttp.send("time=" + time);
                 }
             }
             else {
@@ -185,6 +204,11 @@ function gameLoop(event)
     let time = document.getElementById('time').value;
     progressBar.style.animationDuration = time + 's';
     progressBar.style.animationPlayState = 'running';
+
+    /**
+     * On initialise la date de début de la partie
+     */
+    startTime = new Date().getTime();
 }
 
 /**
