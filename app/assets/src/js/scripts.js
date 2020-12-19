@@ -1,5 +1,6 @@
 let cards = document.querySelectorAll('.card');
 let previousReturnedCard = null;
+let progressBar = document.getElementById('progress-bar');
 
 /**
  * Permet d'ajouter une fonction se déclanchant au click de chaque carte du jeu
@@ -41,7 +42,17 @@ function isGameWon()
 }
 
 /**
+ * La partie est perdue
+ */
+function gameOver()
+{
+    alert("Aie, tu n'as pas été assez rapide ! Essayes de modifier le temps de ta partie !");
+}
+
+/**
  * Affiche une carte durant le temps indiqué
+ * Pour en savoir plus sur les promises :
+ * https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Utiliser_les_promesses
  *
  * @param ms integer Nombre de millisecondes
  * @returns {Promise<unknown>}
@@ -51,6 +62,16 @@ function displayCard(ms)
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Gère les différentes actions lorsqu'une carte est retournée.
+ * Fonction asynchrone afin de pouvoir attendre le retour d'une promise
+ * pour afficher la deuxième carte retournée durant un laps de temps donné
+ *
+ * Pour plus d'informations :
+ * https://www.sitepoint.com/delay-sleep-pause-wait/
+ *
+ * @param card element HTMl
+ */
 async function handleCardAction(card)
 {
     /**
@@ -85,7 +106,11 @@ async function handleCardAction(card)
                 card.classList.add('found');
                 previousReturnedCard.classList.add('found');
                 if (isGameWon()) {
-                    alert('BRAVO');
+                    /**
+                     * On stoppe le timer
+                     */
+                    progressBar.style.animationPlayState = 'paused';
+                    alert("Bravo champion ! Essayes de modifier la durée de la partie pour plus de challenge !");
                 }
             }
             else {
@@ -141,4 +166,24 @@ function handleClickOnCard(event)
     }
 }
 
+/**
+ * Lance une partie
+ *
+ * @param time Durée d'une partie en secondes
+ */
+function gameLoop(time)
+{
+    /**
+     * On ajoute un évènement lorsque le timer est écoulé
+     */
+    progressBar.addEventListener('animationend', gameOver);
+
+    /**
+     * On lance le timer
+     */
+    progressBar.style.animationDuration = time + 's';
+    progressBar.style.animationPlayState = 'running';
+}
+
 addCardListeners();
+gameLoop(300);

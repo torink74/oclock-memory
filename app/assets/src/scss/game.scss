@@ -37,3 +37,36 @@ body {
     background-image: none;
   }
 }
+
+.progress-container {
+  margin: 25px auto;
+  width: 700px;
+  height: 30px;
+  background-color: lightgray;
+}
+
+.progress-bar {
+  height: 100%;
+  animation: progressbar-countdown;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  animation-timing-function: linear;
+  /* Sera mis à jour via le javascript */
+  animation-duration: 60s;
+  /* On ne souhaite que l'animation ne se déclenche qu'une fois */
+  animation-iteration-count: 1;
+  /* Sera démarré via le javascript */
+  animation-play-state: paused;
+}
+
+/* La progression va du vert au rouge */
+@keyframes progressbar-countdown {
+  from {
+    width: 100%;
+    background: #0F0;
+  }
+  to {
+    width: 0;
+    background: #F00;
+  }
+}
