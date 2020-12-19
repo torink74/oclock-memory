@@ -7,10 +7,9 @@ Hello camarade ! Tu t'apprêtes à décourvir le code d'un jeu ancestral.
 1. Installer composer, il permet de récupérer les libraires définies dans le fichier composer.json :
 <br/>https://getcomposer.org/download/
 <!-- -->
-2. Une fois fait, il faut lancer cette commande à la racine du projet (au même endroit où se trouve le fichier que tu es en train de lire) :
+2. Une fois fait, il faut lancer cette commande à la racine du projet (au même endroit où se trouve le fichier que tu es en train de lire) :<br/>
+   `composer install`
 <!-- -->
-`composer install`
-
 3. Ce jeu fonctionne avec une configuration particulière, il faudra créer un fichier `.env` à la racine du projet.
    <!-- -->
    Ce fichier contient les informations nécessaires pour se connecter à la base de données.
