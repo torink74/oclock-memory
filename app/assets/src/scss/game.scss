@@ -1,80 +1,126 @@
-@import "reset";
+@import "vars";
 
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-$font-primary: 'Dosis', sans-serif;
-
 body {
   font-family: $font-primary;
-  background-color: #262626;
   text-align: center;
+  background-color: $background-color;
+  color: $text-color;
 }
 
 h1 {
   font-size: 2em;
-  color: #fff;
-  padding:16px;
   font-weight:bold;
+  padding:16px;
   margin:16px;
 }
 
 .game-header {
+  width: 100%;
   margin: 10px auto;
+  background-color: $header-color;
+}
+
+.game-container {
   width: 800px;
-  height: 100px;
-  background-color: #a3a3a3;
+  height: 500px;
+  margin: 50px auto;
 }
 
 .settings {
-  margin: 10px auto;
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .form-input{
+    width: 100%;
+    text-align: center;
+  }
+
+  .time {
+    width: 60px;
+    padding: 10px;
+    margin: 0 20px;
+    border-radius: 0;
+    border: 0;
+
+    &:focus,&:hover {
+      outline:none;
+    }
+  }
+
+  .submit-button {
+    padding: 10px 10px;
+    margin: 20px 0;
+    border: 2px solid transparent;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    background-color: $success-color;
+
+    &:focus,&:hover {
+      outline:none;
+    }
+
+    &:hover {
+      color: $success-color;
+      border-color: $success-color;
+      background-color: transparent;
+    }
+  }
 }
 
 .scores {
   margin: 20px auto;
-  display: flex;
-  width: 708px;
-  background-color: grey;
+  background-color: $board-color;
+  justify-content: center;
 
   ul {
-    list-style: square;
+    padding: 0;
+    list-style-type: none;
   }
 }
 
 .board-grid {
-  margin: 20px auto;
-  display: flex;
   width: 708px;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 20px auto;
   border: 4px solid grey;
   justify-content: space-between;
-  flex-flow: row wrap;
-  background-color: grey;
+  background-color: $board-color;
 }
 
 .card {
   height: 100px;
   width: 100px;
   padding: 20px;
+  font-size: 150%;
   border-radius: 5px;
-  border: 4px solid grey;
-  background-color: #444;
+  border: 4px solid $board-color;
+  background-color: $card-color;
   background-image: url(../img/cards.png);
   background-size: 100px auto;
-  color: #fff;
-  font-size: 150%;
+  cursor: pointer;
 
   &.hide {
     background-image: none;
   }
+
+  &.found {
+    cursor: not-allowed;
+  }
 }
 
 .progress-container {
-  margin: 25px auto;
   width: 700px;
   height: 30px;
-  background-color: lightgray;
+  margin: 25px auto;
+  background-color: $bar-color;
 }
 
 .progress-bar {
@@ -91,14 +137,14 @@ h1 {
   animation-play-state: paused;
 }
 
-/* La progression va du vert au rouge */
+/* Transition de la progression d'une couleur à l'autre */
 @keyframes progressbar-countdown {
   from {
     width: 100%;
-    background: #0F0;
+    background: $success-color;
   }
   to {
     width: 0;
-    background: #F00;
+    background: $failure-color;
   }
 }

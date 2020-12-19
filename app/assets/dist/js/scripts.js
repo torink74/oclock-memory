@@ -130,7 +130,7 @@ async function handleCardAction(card)
                     /**
                      * On enregistre le temps en base de données
                      */
-                    var xmlhttp = new XMLHttpRequest();
+                    let xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
                             alert("Bravo champion ! Essayes de modifier la durée de la partie pour plus de challenge !");
@@ -211,17 +211,38 @@ function gameLoop(event)
 
     /**
      * On distribue de nouvelles cartes
+     * Utilisation d'Ajax pour charger les données sans recharger la page
      */
-    var xmlhttp = new XMLHttpRequest();
+    let xmlhttp = new XMLHttpRequest();
+    /**
+     * Premier paramètre : type de méthode (POST/GET)
+     * Utilisation de POST pour soumettre les données au serveur via un formulaire post
+     * Deuxième paramètre : url du fichier à appeler
+     * Nous ne mettons pas d'url car le jeu se situe sur la page d'accueil, le fichier n'a donc pas
+     * d'url spécifique
+     * Troisième paramètre : appel asynchrone ou non
+     * La meilleure pratique est de le laisser à true
+     * https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests
+     */
+    xmlhttp.open("POST", "", true);
+    /**
+     * Nécessaire pour envoyer correctement les données post au serveur
+     */
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    /**
+     * Envoie des données via le formulaire (post)
+     */
+    xmlhttp.send("new-game=1");
+
+    /**
+     * Insertion des cartes dans le container 'game-board' suite à l'appel Ajax réussi
+     */
     xmlhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             document.getElementById('game-board').innerHTML = this.response;
             addCardListeners();
         }
     };
-    xmlhttp.open("POST", "", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("new-game=1");
 
     /**
      * On initialise la date de début de la partie
@@ -231,9 +252,12 @@ function gameLoop(event)
     /**
      * Recommence l'animation du timer
      */
-    progressBar.classList.remove('progress-bar');
-    void progressBar.offsetWidth;
-    progressBar.classList.add('progress-bar');
+    progressBar.style.animation = 'none';
+    // Permet d'appliquer les changements de l'animation en exécutant le reflow
+    // Pour plus d'informations sur le reflow :
+    // https://sites.google.com/site/getsnippet/javascript/dom/repaints-and-reflows-manipulating-the-dom-responsibly
+    progressBar.offsetHeight;
+    progressBar.style.animation = 'progressbar-countdown';
 
     /**
      * On lance le timer en récupérant la valeur spécifiée dans les options du jeu

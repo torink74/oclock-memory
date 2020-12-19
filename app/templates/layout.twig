@@ -16,15 +16,9 @@
 <body>
 {% block body %}
     <div id="body">
-        {% block header %}
-            {%- include "components/header/base.twig" -%}
-        {% endblock %}
         <main role="main">
             {% block mainContent "" %}
         </main>
-        {% block footer %}
-            {%- include "components/footer/base.twig" -%}
-        {% endblock %}
     </div>
 {% endblock body %}
 

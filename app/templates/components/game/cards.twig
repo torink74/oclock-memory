@@ -1,5 +1,4 @@
 {% for index, position in cards %}
-    <div class="card hide" data-letter="{{ index }}" style="background-position: 0 {{ position }}px">
-        {{ index }}
-    </div>
+    {# position correspond à la hauteur en px de l'image voulue #}
+    <div class="card hide" data-letter="{{ index }}" style="background-position: 0 {{ position }}px"></div>
 {% endfor %}
