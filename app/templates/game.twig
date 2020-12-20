@@ -15,14 +15,7 @@
         <div id="game-board" class="board-grid">
             {# Les cartes sont chargées via un appel ajax une fois que le joueur a cliqué sur "Jouer" #}
             {# Le score disapaîtra à ce moment #}
-            <div id="scores" class="scores">
-                <h2>Les meilleurs temps !</h2>
-                <ul>
-                    {% for score in scores %}
-                        <li>{{ score }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% include "components/game/highscore.twig" %}
         </div>
         <div id="progress" class="progress-container">
             <div id="progress-bar" class="progress-bar"></div>

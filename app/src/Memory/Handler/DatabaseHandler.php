@@ -17,6 +17,9 @@ final class DatabaseHandler
 
     public function __construct()
     {
+        /**
+         * Récupère les valeurs fournis dans le fichier .env
+         */
         $settings = [
             'database_type' => 'mysql',
             'database_name' => isset($_ENV['DB_NAME']) ? $_ENV['DB_NAME'] : 'database',

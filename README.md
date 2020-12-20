@@ -1,6 +1,7 @@
 # Projet O'clock : Memory
 ***
-Hello camarade ! Tu t'apprêtes à décourvir le code d'un jeu ancestral.
+Hello camarade ! Tu t'apprêtes à décourvir le code d'un jeu ancestral.<br/>
+Les règles sont simples; il y a face à toi des cartes retournées. Chaque carte possède un double qu'il faut retrouver afin de former la paire. Si les deux cartes que tu retournes ne sont pas les mêmes, alors elle reviennent face cachée.<br/>Pour gagner, il faut trouver toutes les paires.
 
 ### Pour pouvoir y jouer, il faudra suivre ces étapes :
 
@@ -18,7 +19,8 @@ Hello camarade ! Tu t'apprêtes à décourvir le code d'un jeu ancestral.
  <!-- -->
 4. Une base de données est fournie via le fichier `dbexport.sql`.
 Il faut importer ces données dans votre base pour que le projet fonctionne.
-
+<!-- -->
+5. Il faut configurer le vhost pour que le *documentRoot* pointe vers le dossier **app**.
 
 ### Informations complétementaires
 Ce jeu utilise Twig pour afficher le contenu HTML.

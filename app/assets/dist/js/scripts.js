@@ -134,6 +134,9 @@ async function handleCardAction(card)
                     xmlhttp.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
                             alert("Bravo champion ! Essayes de modifier la durée de la partie pour plus de challenge !");
+
+                            /* On affiche les nouveaux highscores */
+                            document.getElementById('game-board').innerHTML = this.response;
                         }
                     };
                     xmlhttp.open("POST", "", true);

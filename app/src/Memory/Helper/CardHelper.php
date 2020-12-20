@@ -4,6 +4,12 @@ namespace Memory\Helper;
 
 final class CardHelper
 {
+    /**
+     * Distribue un jeu de cartes mélangé
+     *
+     * @param $number integer Nombre de cartes uniques à retourner
+     * @return array de cartes
+     */
     public static function getCards($number)
     {
         /**

@@ -5,8 +5,8 @@ use Memory\Controller\GameController;
 /* On appelle les fichiers qui ont été générés par Composer */
 require __DIR__ . '/../vendor/autoload.php';
 
+/* Définition de variables globales utiles au projet */
 define('MEMORY_TEMPLATES_PATH', __DIR__ . '/templates/');
-define('MEMORY_ASSETS_PATH', __DIR__ . '/assets/dist/');
 
 /**
  * Permet de lire les fichiers .env et de récupérer leurs données
