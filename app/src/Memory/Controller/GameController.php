@@ -41,10 +41,14 @@ final class GameController
 
     private function _handleAjaxRequests()
     {
-        /* Le joueur a gagné la partie */
-        if (isset($_POST['time'])) {
-            $time = (int)$_POST['time'];
-            $this->_registerWin($time);
+        /* Le joueur a terminé la partie */
+        if (isset($_POST['game-over']) && $_POST['game-over'] == 1) {
+
+            $time = isset($_POST['time']) ? (int)$_POST['time'] : null;
+            /* Si un temps est transmis, le joueur a gagné */
+            if ($time !== null) {
+                $this->_registerWin($time);
+            }
 
             /* Récupération des 5 meilleurs temps */
             $highscores = $this->_getHighscores(5);

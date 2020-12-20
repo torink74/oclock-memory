@@ -56,7 +56,18 @@ function isGameWon()
  */
 function gameOver()
 {
-    alert("Aie, tu n'as pas été assez rapide ! Essayes de modifier le temps de ta partie !");
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            alert("Aie, tu n'as pas été assez rapide ! Essayes de modifier le temps de ta partie !");
+
+            /* On affiche les nouveaux highscores */
+            document.getElementById('game-board').innerHTML = this.response;
+        }
+    };
+    xmlhttp.open("POST", "", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("game-over=1");
 }
 
 /**
@@ -141,7 +152,7 @@ async function handleCardAction(card)
                     };
                     xmlhttp.open("POST", "", true);
                     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xmlhttp.send("time=" + time);
+                    xmlhttp.send("game-over=1&time=" + time);
                 }
             }
             else {
